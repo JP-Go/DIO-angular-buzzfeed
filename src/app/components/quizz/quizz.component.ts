@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component} from '@angular/core';
 import quizz_questions from "../../../assets/data/quizz_questions.json"
 
 @Component({
   selector: 'app-quizz',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './quizz.component.html',
   styleUrls: ['./quizz.component.css']
 })
-
-export class QuizzComponent implements OnInit {
+export class QuizzComponent {
 
   title:string = ""
 
@@ -22,9 +24,7 @@ export class QuizzComponent implements OnInit {
 
   finished:boolean = false
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
     if(quizz_questions){
       this.finished = false
       this.title = quizz_questions.title
@@ -34,13 +34,8 @@ export class QuizzComponent implements OnInit {
 
       this.questionIndex = 0
       this.questionMaxIndex = this.questions.length
-
-      console.log(this.questionIndex)
-      console.log(this.questionMaxIndex)
     }
-
   }
-
   playerChoose(value:string){
     this.answers.push(value)
     this.nextStep()
@@ -61,7 +56,7 @@ export class QuizzComponent implements OnInit {
 
   async checkResult(anwsers:string[]){
 
-    const result = anwsers.reduce((previous, current, i, arr)=>{
+    const result = anwsers.reduce((previous, current, _i, arr)=>{
         if(
           arr.filter(item => item === previous).length >
           arr.filter(item => item === current).length
