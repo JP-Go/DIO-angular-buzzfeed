@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import quizz_questions from "../../../assets/data/quizz_questions.json"
 
 @Component({
